@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nisarga Vishwanath — Marketing Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sacramento&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --burgundy:    #6B0F0F;
+      --dark-red:    #3d0505;
+      --beige-light: #e8d5bf;
+      --beige-mid:   #c9a882;
+      --beige-dark:  #b0916e;
+      --cream:       #f5ede0;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--burgundy);
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────
+       SECTION 1 — HERO
+    ───────────────────────────────────────── */
+    #hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: #1a0303;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 55% 50%, #3a0808 0%, #0d0101 75%);
+      z-index: 0;
+    }
+
+    .hero-name {
+      position: absolute;
+      top: 2.2rem;
+      right: 3.2rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--white);
+      z-index: 10;
+      text-transform: uppercase;
+    }
+
+    .hero-type {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      padding: 0 3rem 5.5rem;
+      line-height: 0.86;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* "marketing" — huge Bebas Neue, full width */
+    .hero-type .line-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 15vw, 14rem);
+      color: var(--white);
+      display: block;
+      letter-spacing: 0.01em;
+    }
+
+    /* "Portfolio" — Sacramento script, overlaid on top of marketing */
+    .hero-type .line-script {
+      font-family: 'Sacramento', cursive;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      color: var(--burgundy);
+      display: block;
+      margin-left: clamp(10rem, 24vw, 22rem);
+      margin-bottom: -1.8rem;
+      line-height: 1;
+    }
+
+    .hero-nav {
+      position: absolute;
+      bottom: 2.6rem;
+      right: 3.2rem;
+      display: flex;
+      gap: 2.8rem;
+      z-index: 10;
+    }
+
+    .hero-nav a {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.35rem;
+      color: var(--white);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 1px;
+      transition: color 0.25s;
+    }
+
+    .hero-nav a:hover { color: var(--beige-mid); }
+
+    /* ─────────────────────────────────────────
+       SECTION 2 — ABOUT
+    ───────────────────────────────────────── */
+    #about {
+      background: var(--beige-light);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 6rem 5.5rem;
+      gap: 5rem;
+    }
+
+    .about-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      color: var(--burgundy);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .about-heading-script {
+      font-family: 'Sacramento', cursive;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      color: var(--burgundy);
+      display: block;
+      line-height: 1.2;
+      margin-top: 0.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-body p {
+      font-size: 0.96rem;
+      line-height: 1.8;
+      color: #3a1a1a;
+      margin-bottom: 1.15rem;
+      font-weight: 300;
+    }
+
+    .about-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ── MARQUEE TICKER ── */
+    .marquee-bar {
+      background: var(--dark-red);
+      overflow: hidden;
+      padding: 0.75rem 0;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      gap: 0;
+      animation: marquee-scroll 28s linear infinite;
+    }
+    .marquee-track span {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      padding: 0 2.5rem;
+    }
+    .marquee-track .dot {
+      color: rgba(255,255,255,0.3);
+      padding: 0;
+      letter-spacing: 0;
+    }
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── POLAROID PHOTO ── */
+    .photo-scrapbook {
+      position: relative;
+      width: 340px;
+      height: 420px;
+    }
+
+    .card-bg {
+      position: absolute;
+      background: #f0e6d6;
+      border: 1px solid #d4b896;
+      border-radius: 3px;
+      box-shadow: 2px 4px 18px rgba(60,10,10,0.1);
+    }
+    .card-bg.layer1 { inset: 0; transform: rotate(-4deg); }
+    .card-bg.layer2 { inset: 0; transform: rotate(2.5deg); background: #ecdcc8; }
+
+    .photo-frame {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 3px;
+      border: 10px solid #faf5ee;
+      border-bottom-width: 48px;
+      box-shadow: 0 12px 48px rgba(60,10,10,0.22), 0 2px 8px rgba(60,10,10,0.1);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transform: scale(1.08) translateY(-2%);
+      filter: saturate(0.9);
+    }
+
+    .tape {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 88px;
+      height: 26px;
+      background: rgba(200,168,130,0.38);
+      border-radius: 2px;
+      z-index: 10;
+    }
+
+    .seal {
+      position: absolute;
+      bottom: -24px;
+      right: -22px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      font-size: 1.3rem;
+      box-shadow: 0 4px 14px rgba(60,10,10,0.25);
+      z-index: 10;
+    }
+
+    /* ── CONTACT HEADSHOT ── */
+    .contact-headshot {
+      width: 220px;
+      height: 260px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      flex-shrink: 0;
+    }
+    .contact-headshot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: saturate(0.85);
+    }
+
+    /* ─────────────────────────────────────────
+       SECTION 3 — SKILLS & CERTIFICATIONS
+    ───────────────────────────────────────── */
+    #skills {
+      background: var(--beige-mid);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      padding: 6rem 5.5rem;
+      gap: 3.5rem;
+    }
+
+    /* education */
+    .edu-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 2.8rem;
+    }
+    .edu-icon { font-size: 1.9rem; margin-top: 2px; }
+    .edu-item { margin-bottom: 0.9rem; }
+    .edu-degree {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.97rem;
+      color: #2a0808;
+    }
+    .edu-school {
+      display: block;
+      font-size: 0.83rem;
+      color: #4a2020;
+      font-weight: 300;
+      margin-top: 0.15rem;
+    }
+    .edu-courses {
+      display: block;
+      font-size: 0.74rem;
+      color: #7a4040;
+      font-weight: 300;
+      margin-top: 0.4rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* GLI photos */
+    .gli-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.2rem;
+      margin-bottom: 0.4rem;
+    }
+    .gli-photo-slot {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .gli-photo-slot img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #d4b896;
+      display: block;
+    }
+    .gli-caption {
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--beige-dark);
+      letter-spacing: 0.04em;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* tool logo grid — horizontal wrap row */
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tool-chip {
+      background: #f5ede0;
+      border: 1.5px solid #d4b896;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+      white-space: nowrap;
+    }
+
+    .tool-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(60,10,10,0.12);
+    }
+
+    .tool-chip img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+    }
+
+    .tool-chip svg {
+      width: 16px !important;
+      height: 16px !important;
+      flex-shrink: 0;
+    }
+
+    .tool-chip span {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--burgundy);
+      letter-spacing: 0.02em;
+    }
+
+    /* right side */
+    .skills-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      color: var(--dark-red);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+    }
+
+    /* volunteer photo */
+    .volunteer-photo-block {
+      margin-bottom: 1.2rem;
+    }
+    .volunteer-photo-block img {
+      width: 100%;
+      max-height: 240px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+    .volunteer-photo-caption {
+      font-style: italic;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--beige-dark);
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    /* certification cards */
+    .cert-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .cert-card {
+      background: #fff9f2;
+      border: 1px solid #d4b896;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .cert-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .cert-badge.google  { background: #e8f0fe; }
+    .cert-badge.hubspot { background: #fff3ee; }
+    .cert-badge.meta    { background: #e7f0ff; }
+    .cert-badge.lvmh    { background: #1a1a1a; }
+    .cert-info { flex: 1; }
+    .cert-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--dark-red);
+      line-height: 1.3;
+    }
+    .cert-meta {
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--beige-dark);
+      margin-top: 0.1rem;
+    }
+    .cert-tick {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.67rem;
+      font-weight: 600;
+      color: #2d7a2d;
+      background: #e8f5e9;
+      border-radius: 20px;
+      padding: 0.2rem 0.55rem;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+    .cert-tick::before { content: '✓ '; }
+    .cert-tick.in-progress {
+      color: #e65100;
+      background: #fff3e0;
+    }
+    .cert-tick.in-progress::before { content: '⏳ '; }
+    .cert-badge.gads     { background: #e8f0fe; }
+    .cert-badge.anthropic { background: #f5f0ff; }
+    .cert-badge.mycaptain { background: #fff0e0; }
+    .cert-sep { color: var(--beige-dark); margin: 0 0.2rem; }
+
+
+    /* ─────────────────────────────────────────
+       SECTION 4 — WORK EXPERIENCE
+    ───────────────────────────────────────── */
+    #work {
+      background: var(--beige-light);
+      min-height: 100vh;
+      padding: 5.5rem 5.5rem 7rem;
+    }
+
+    .work-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      color: var(--burgundy);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      margin-bottom: 4rem;
+    }
+
+    /* Polaroid strip — clean flex row */
+    .category-strip {
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      margin-bottom: 4.5rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .polaroid {
+      background: #f5ede0;
+      border: 1px solid #d4b896;
+      padding: 0.6rem 0.6rem 2rem;
+      box-shadow: 2px 5px 16px rgba(60,10,10,0.12);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      max-width: 140px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: default;
+    }
+    .polaroid:nth-child(odd)  { transform: rotate(-2.5deg); }
+    .polaroid:nth-child(even) { transform: rotate(2deg); }
+    .polaroid:hover { transform: rotate(0deg) scale(1.05) !important; box-shadow: 4px 8px 24px rgba(60,10,10,0.18); z-index: 5; }
+
+    .polaroid-icon {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--beige-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .polaroid-label {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.05rem;
+      color: var(--burgundy);
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    /* Timeline */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.4rem;
+    }
+
+    .exp-card {
+      background: #f5ede0;
+      border-left: 4px solid var(--burgundy);
+      border-radius: 0 10px 10px 0;
+      padding: 1.4rem 2rem;
+      box-shadow: 0 2px 14px rgba(60,10,10,0.06);
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-left-color 0.25s ease;
+    }
+    .exp-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(60,10,10,0.13);
+      border-left-color: var(--dark-red);
+    }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 1.55rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      border: 3px solid var(--beige-light);
+    }
+
+    /* Single-line compact header */
+    .exp-header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.3rem 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .exp-company {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--dark-red);
+      letter-spacing: 0.04em;
+    }
+
+    .exp-sep {
+      color: var(--beige-dark);
+      font-size: 0.75rem;
+      font-weight: 300;
+    }
+
+    .exp-role {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--burgundy);
+    }
+
+    .exp-date {
+      font-size: 0.75rem;
+      color: #7a4040;
+      font-weight: 300;
+      background: var(--beige-mid);
+      padding: 0.15rem 0.65rem;
+      border-radius: 20px;
+    }
+
+    .exp-location {
+      font-size: 0.75rem;
+      color: #9a6060;
+      font-weight: 300;
+    }
+
+    /* no more stacked role/location rows */
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.87rem;
+      line-height: 1.7;
+      color: #3a1a1a;
+      font-weight: 300;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '●';
+      position: absolute;
+      left: 0;
+      color: var(--burgundy);
+      font-size: 0.45rem;
+      top: 0.5rem;
+    }
+
+    /* View Projects button — always visible */
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      padding: 0.45rem 1.1rem;
+      background: var(--burgundy);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .read-more-btn:hover {
+      background: var(--dark-red);
+      transform: translateX(3px);
+    }
+
+    /* Weezy photo gallery */
+    .exp-gallery {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+      overflow-x: auto;
+      padding-bottom: 0.4rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--beige-mid) transparent;
+    }
+
+    .exp-gallery::-webkit-scrollbar { height: 4px; }
+    .exp-gallery::-webkit-scrollbar-track { background: transparent; }
+    .exp-gallery::-webkit-scrollbar-thumb { background: var(--beige-mid); border-radius: 2px; }
+
+    .exp-gallery img {
+      height: 160px;
+      width: auto;
+      min-width: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1.5px solid #d4b896;
+      flex-shrink: 0;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .exp-gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(60,10,10,0.15);
+    }
+
+    .exp-card.add-more {
+      background: transparent;
+      border: 2px dashed var(--beige-dark);
+      border-left: 2px dashed var(--beige-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70px;
+      color: var(--beige-dark);
+      font-size: 0.88rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    .exp-card.add-more::before { display: none; }
+
+    /* ─────────────────────────────────────────
+       SECTION 5 — BLOGS
+    ───────────────────────────────────────── */
+    #blogs {
+      background: var(--cream);
+      padding: 6rem 5.5rem 7rem;
+    }
+
+    .blogs-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--beige-dark);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .blogs-intro {
+      font-size: 0.96rem;
+      font-weight: 300;
+      color: #3a1a1a;
+      margin-bottom: 3rem;
+    }
+
+    .blogs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      margin-bottom: 2.2rem;
+    }
+
+    /* dark immersive blog cards */
+    .blog-card {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      min-height: 280px;
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .blog-card-bg {
+      position: absolute; inset: 0;
+      z-index: 0;
+    }
+
+    .blog-card-content {
+      position: absolute; inset: 0;
+      z-index: 2;
+      padding: 1.6rem 1.4rem;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .blog-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 0.22rem 0.65rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+
+    .blog-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-teaser {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    /* hover overlay */
+    .blog-card-hover {
+      position: absolute; inset: 0;
+      z-index: 3;
+      background: rgba(0,0,0,0.52);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.6rem;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .blog-card:hover .blog-card-hover { opacity: 1; }
+
+    .blog-hover-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .blogs-more {
+      text-align: center;
+    }
+
+    .blogs-more a {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--dark-red);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .blogs-more a:hover { color: var(--burgundy); }
+
+    /* ─────────────────────────────────────────
+       SECTION 6 — CONTACT
+    ───────────────────────────────────────── */
+    #contact {
+      background: #1a0303;
+      padding: 7rem 5.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, #3a0808 0%, #0d0101 70%);
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 5rem;
+    }
+
+    .contact-left {}
+
+    .contact-eyebrow {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.6rem;
+      color: var(--beige-mid);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 8rem);
+      color: var(--white);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.6rem;
+    }
+
+    .contact-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #c8b0a0;
+      letter-spacing: 0.04em;
+    }
+
+    .contact-status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulse-dot 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(0.85); }
+    }
+
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.4rem 1.8rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-link:hover {
+      background: rgba(255,255,255,0.06);
+      transform: translateX(6px);
+    }
+
+    .contact-link-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .contact-link-icon.linkedin { background: #0A66C2; }
+    .contact-link-icon.email    { background: var(--burgundy); }
+
+    .contact-link-text {}
+
+    .contact-link-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8a6a5a;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-link-value {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+
+    .contact-footer {
+      position: relative;
+      z-index: 2;
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-footer-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .contact-footer-copy {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─────────────────────────────────────────
+       REVEAL ANIMATION
+    ───────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      #about, #skills { grid-template-columns: 1fr; padding: 4rem 2rem; }
+      .about-right { margin-top: 2rem; }
+      #work { padding: 4rem 2rem 5rem; }
+      .work-heading { font-size: 3.5rem; }
+      .category-strip { height: auto; display: flex; flex-wrap: wrap; gap: 1rem; position: static; }
+      .polaroid { position: static !important; transform: none !important; }
+      .envelope-bg { display: none; }
+      .hero-name { font-size: 0.85rem; top: 1.2rem; right: 1.2rem; }
+      .hero-nav { right: 1.2rem; bottom: 1.2rem; gap: 1.4rem; }
+      .hero-type { padding: 0 1.5rem 4rem; }
+      #blogs { padding: 4rem 2rem 5rem; }
+      .blogs-grid { grid-template-columns: 1fr 1fr; }
+      #contact { padding: 5rem 2rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section id="hero">
+  <!-- grain texture overlay -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.04;" xmlns="http://www.w3.org/2000/svg">
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+
+  <span class="hero-name">nisarga vishwanath</span>
+
+  <div class="hero-type">
+    <span class="line-script">Portfolio</span>
+    <span class="line-main">marketing</span>
+  </div>
+
+  <nav class="hero-nav">
+    <a href="#about">about</a>
+    <a href="#work">work experience</a>
+    <a href="#skills">skills</a>
+    <a href="#blogs">blog</a>
+    <a href="#contact">contact</a>
+  </nav>
+</section>
+
+<!-- MARQUEE TICKER -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span>Email Marketing</span><span class="dot">·</span>
+    <span>SEO</span><span class="dot">·</span>
+    <span>Paid Campaigns</span><span class="dot">·</span>
+    <span>Analytics</span><span class="dot">·</span>
+    <span>Content Strategy</span><span class="dot">·</span>
+    <span>GTM</span><span class="dot">·</span>
+    <span>Brand Identity</span><span class="dot">·</span>
+    <span>Community Growth</span><span class="dot">·</span>
+    <!-- duplicate for seamless loop -->
+    <span>Email Marketing</span><span class="dot">·</span>
+    <span>SEO</span><span class="dot">·</span>
+    <span>Paid Campaigns</span><span class="dot">·</span>
+    <span>Analytics</span><span class="dot">·</span>
+    <span>Content Strategy</span><span class="dot">·</span>
+    <span>GTM</span><span class="dot">·</span>
+    <span>Brand Identity</span><span class="dot">·</span>
+    <span>Community Growth</span><span class="dot">·</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     ABOUT
+══════════════════════════════════════ -->
+<section id="about">
+  <div class="about-left reveal">
+    <h1 class="about-heading">i'm nisarga,</h1>
+    <span class="about-heading-script">nice to meet you!</span>
+
+    <div class="about-body">
+      <p>
+        I took the long way here. I started as an engineer, initially drawn to systems, logic,
+        and how things fit together. Somewhere along the way, I realised the problems I actually
+        wanted to solve were human ones, basically how brands communicate, how stories land,
+        and how content moves people to act. So I crossed over, and I never looked back.
+      </p>
+      <p>
+        Now I build marketing like I used to build products and services with structure, data,
+        and a lot of intention. I've led campaigns across B2B SaaS, DTC, and nonprofit spaces
+        and what drives me is content that doesn't just perform on a dashboard but actually
+        resonates. The kind that makes someone stop scrolling, feel something, and remember you.
+      </p>
+      <p>
+        I believe the best marketing is really just great storytelling with a strategy behind it.
+        Every brand has something worth saying, I'm obsessed with finding the sharpest, most
+        honest way to say it, and then making sure the right people hear it.
+      </p>
+      <p>
+        I'm looking for a team where I can build things that are measurable and meaningful.
+      </p>
+    </div>
+  </div>
+
+  <div class="about-right reveal">
+    <div class="photo-scrapbook">
+      <div class="card-bg layer1"></div>
+      <div class="card-bg layer2"></div>
+      <div class="tape"></div>
+      <div class="photo-frame">
+        <img src="Gemini_Generated_Image_mvkx4xmvkx4xmvkx.png" alt="Nisarga Vishwanath" />
+      </div>
+      <div class="seal">♥</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SKILLS & CERTIFICATIONS
+══════════════════════════════════════ -->
+<section id="skills">
+  <div class="skills-left reveal">
+
+    <!-- Education -->
+    <div style="display:flex;flex-direction:column;gap:1.4rem;margin-bottom:2.8rem;">
+
+      <div class="edu-block">
+        <span class="edu-icon">🎓</span>
+        <div>
+          <div class="edu-degree">Masters in Industrial Engineering, Marketing &nbsp;·&nbsp; GPA 3.6</div>
+          <span class="edu-school">Northeastern University, Boston MA &nbsp;|&nbsp; 2023 – 2025</span>
+          <span class="edu-courses">Digital Product Management · Marketing Analytics · Product Development · Data Visualisation</span>
+        </div>
+      </div>
+
+      <div class="edu-block">
+        <span class="edu-icon">🏆</span>
+        <div>
+          <div class="edu-degree">Graduate Leadership Institute &nbsp;·&nbsp; Certificate of Completion</div>
+          <span class="edu-school">Northeastern University &nbsp;|&nbsp; Sep 2023 – Dec 2023</span>
+          <span class="edu-courses">Lead 360 · Team Leadership · Cross-Functional Collaboration · Executive Presence</span>
+        </div>
+      </div>
+
+      <!-- GLI Photos -->
+      <div class="gli-photos">
+        <div class="gli-photo-slot">
+          <img src="images/northeastern/gli-team.jpg" alt="GLI Cohort Fall 2023"
+               onerror="this.style.display='none'" />
+          <span class="gli-caption">Graduate Leadership Institute · Fall 2023 Cohort</span>
+        </div>
+        <div class="gli-photo-slot">
+          <img src="images/northeastern/gli-certificate.jpg" alt="Certificate of Completion"
+               onerror="this.style.display='none'" />
+          <span class="gli-caption">Certificate of Completion · Nisarga Vishwanath</span>
+        </div>
+      </div>
+
+      <div class="edu-block">
+        <span class="edu-icon">🔬</span>
+        <div>
+          <div class="edu-degree">Volunteer Science Teacher</div>
+          <span class="edu-school">Government School, India &nbsp;|&nbsp; 2021</span>
+        </div>
+      </div>
+
+      <!-- Volunteer Photo -->
+      <div class="gli-photos" style="grid-template-columns: 1fr;">
+        <div class="gli-photo-slot">
+          <img src="images/volunteer/classroom.jpg" alt="Teaching science at a government school"
+               onerror="this.style.display='none'" />
+          <span class="gli-caption">Volunteer Science Teacher · Government School, India · 2021</span>
+        </div>
+      </div>
+
+      <div class="edu-block">
+        <span class="edu-icon">🎓</span>
+        <div>
+          <div class="edu-degree">Bachelors in Information Science &amp; Engineering &nbsp;·&nbsp; GPA 3.2</div>
+          <span class="edu-school">Vidya Vikas Institute of Engineering &amp; Technology, Mysore &nbsp;|&nbsp; 2018 – 2022</span>
+          <span class="edu-courses">Information Systems · Database Management · Data Structures · Software Engineering</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tools with logos -->
+    <div class="tools-grid">
+      <div class="tool-chip">
+        <!-- Canva inline SVG — accurate purple wordmark icon -->
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="18" fill="#7D2AE8"/>
+          <path d="M50 18C32.33 18 18 32.33 18 50C18 67.67 32.33 82 50 82C58.5 82 65.5 78.8 70.4 73.5C71.6 72.2 71.5 70.1 70.1 69C68.8 67.9 66.8 68.1 65.6 69.3C61.8 73.3 56.2 75.8 50 75.8C35.8 75.8 24.2 64.2 24.2 50C24.2 35.8 35.8 24.2 50 24.2C56.2 24.2 61.8 26.7 65.6 30.7C66.8 31.9 68.8 32.1 70.1 31C71.5 29.9 71.6 27.8 70.4 26.5C65.5 21.2 58.5 18 50 18Z" fill="white"/>
+          <ellipse cx="68" cy="50" rx="8" ry="10" fill="white"/>
+        </svg>
+        <span>Canva</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot" />
+        <span>HubSpot</span>
+      </div>
+      <div class="tool-chip">
+        <!-- Adobe Illustrator accurate logo -->
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="10" fill="#300" />
+          <rect width="100" height="100" rx="10" fill="#FF9A00" fill-opacity="0.15"/>
+          <rect x="6" y="6" width="88" height="88" rx="7" stroke="#FF9A00" stroke-width="3" fill="none"/>
+          <text x="50" y="62" font-family="Georgia, serif" font-size="38" font-weight="bold" fill="#FF9A00" text-anchor="middle">Ai</text>
+        </svg>
+        <span>Illustrator</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/googleanalytics/E37400" alt="Google Analytics" />
+        <span>Google Analytics</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/mailchimp/FFE01B" alt="Mailchimp" />
+        <span>Mailchimp</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/googleads/4285F4" alt="Google Ads" />
+        <span>Google Ads</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/wordpress/21759B" alt="WordPress" />
+        <span>WordPress</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" />
+        <span>Figma</span>
+      </div>
+      <div class="tool-chip">
+        <!-- Power BI accurate logo -->
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="10" fill="#1a1a2e"/>
+          <!-- three bars in Power BI yellow/gold -->
+          <rect x="18" y="55" width="18" height="30" rx="3" fill="#F2C811"/>
+          <rect x="41" y="38" width="18" height="47" rx="3" fill="#F2C811" fill-opacity="0.85"/>
+          <rect x="64" y="20" width="18" height="65" rx="3" fill="#F2C811"/>
+        </svg>
+        <span>Power BI</span>
+      </div>
+      <div class="tool-chip">
+        <!-- Tableau official logo as inline SVG for accuracy -->
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="28" height="28" rx="4" fill="#E97627"/>
+          <g fill="white">
+            <rect x="13" y="4" width="2" height="6"/>
+            <rect x="13" y="18" width="2" height="6"/>
+            <rect x="4" y="13" width="6" height="2"/>
+            <rect x="18" y="13" width="6" height="2"/>
+            <rect x="7.5" y="7.5" width="2" height="4" transform="rotate(45 7.5 7.5)"/>
+            <rect x="17.5" y="17" width="2" height="4" transform="rotate(45 17.5 17)"/>
+            <rect x="17" y="7.5" width="4" height="2" transform="rotate(45 17 7.5)"/>
+            <rect x="7" y="17.5" width="4" height="2" transform="rotate(45 7 17.5)"/>
+          </g>
+        </svg>
+        <span>Tableau</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" />
+        <span>Python</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/shopify/96BF48" alt="Shopify" />
+        <span>Shopify</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/jira/0052CC" alt="Jira" />
+        <span>Jira</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/asana/F06A6A" alt="Asana" />
+        <span>Asana</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/meta/0081FB" alt="Meta" />
+        <span>Meta Ads</span>
+      </div>
+      <div class="tool-chip">
+        <!-- SEMrush — plain orange S icon -->
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="28" height="28" rx="6" fill="#FF642D"/>
+          <text x="14" y="20" font-family="Georgia,serif" font-size="17" font-weight="bold" fill="white" text-anchor="middle">S</text>
+        </svg>
+        <span>SEMrush</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/salesforce/00A1E0" alt="Salesforce" />
+        <span>Salesforce</span>
+      </div>
+      <div class="tool-chip">
+        <img src="https://cdn.simpleicons.org/clickup/7B68EE" alt="ClickUp" />
+        <span>ClickUp</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="skills-right reveal">
+    <h2 class="skills-heading">skills &amp;<br/>certifi&shy;cations</h2>
+
+    <div class="cert-cards">
+
+      <div class="cert-card">
+        <div class="cert-badge google">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Google Analytics 4 Certification</div>
+          <div class="cert-meta">Google &nbsp;·&nbsp; 2025</div>
+        </div>
+        <span class="cert-tick">Completed</span>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge hubspot">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF7A59" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.164 7.931V5.085a2.198 2.198 0 001.267-1.978V3.06A2.199 2.199 0 0017.234.862h-.047a2.199 2.199 0 00-2.197 2.198v.047a2.198 2.198 0 001.267 1.978v2.846a6.231 6.231 0 00-2.798 1.103L6.506 3.85a2.43 2.43 0 00.072-.56 2.438 2.438 0 10-2.438 2.438 2.414 2.414 0 001.268-.367l6.848 4.817a6.26 6.26 0 00-.942 3.338 6.259 6.259 0 001.09 3.543l-2.087 2.087a1.992 1.992 0 00-.56-.088 2.014 2.014 0 102.014 2.014 1.992 1.992 0 00-.088-.56l2.06-2.06a6.274 6.274 0 003.743 1.237 6.287 6.287 0 000-12.573 6.35 6.35 0 00-1.322.145zm1.322 9.52a3.233 3.233 0 110-6.466 3.233 3.233 0 010 6.466z"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Email Marketing Certification</div>
+          <div class="cert-meta">HubSpot Academy &nbsp;·&nbsp; 2025</div>
+        </div>
+        <span class="cert-tick">Completed</span>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge meta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0081FB" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973.386 1.68 1.257 2.834 2.493 2.834.966 0 1.42-.185 2.843-2.312l.754-1.176 1.198-1.892c.815-1.283 1.715-2.689 2.706-4.054.854-1.185 1.824-2.405 2.925-3.485-.604-1.226-1.51-2.308-2.926-2.308zm10.06.096c-1.893 0-3.17 1.246-4.39 2.683-1.23 1.47-2.328 3.113-3.403 4.713l-.516.79-.018.027c-.875 1.375-1.697 2.671-2.485 3.732-.637.864-1.13 1.323-1.536 1.323-.52 0-.968-.71-1.226-1.862C3.07 15.15 3 14.558 3 13.974c0-2.277.617-4.662 1.661-6.213.866-1.29 1.947-2.076 3.254-2.076.724 0 1.352.259 1.94.699.584.438 1.044 1.006 1.45 1.634.69-1.04 1.47-1.986 2.37-2.653.873-.643 1.826-1.04 2.88-1.04.87 0 1.614.263 2.233.748.617.484 1.082 1.175 1.405 1.98.32.805.47 1.7.47 2.647 0 2.065-.642 4.024-1.6 5.382-.954 1.355-2.214 2.142-3.558 2.142-.58 0-1.094-.157-1.55-.473-.454-.316-.819-.765-1.105-1.323l-.735 3.518c-.267 1.273-.73 2.457-1.396 3.51H18c.58 0 1.062-.185 1.463-.556.4-.37.7-.888.907-1.544.207-.655.31-1.43.31-2.277 0-1.062-.165-2.043-.497-2.942-.332-.9-.813-1.698-1.452-2.393-.64-.695-1.402-1.29-2.273-1.773.518-.838 1.128-1.537 1.808-2.016.657-.462 1.35-.694 2.072-.694.663 0 1.21.195 1.645.582.432.387.72.944.853 1.657.06.31.086.644.086.993 0 .768-.133 1.56-.4 2.338-.268.777-.663 1.493-1.177 2.088l.57 1.85c.645-.69 1.168-1.538 1.554-2.52.387-.98.58-2.036.58-3.128 0-1.117-.193-2.127-.58-3.013-.385-.884-.955-1.585-1.703-2.093C20.01 4.455 19.09 4.126 18.026 4.126h-.05z"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Digital Marketing &amp; E-Commerce Certificate</div>
+          <div class="cert-meta">Meta &nbsp;·&nbsp; 2024</div>
+        </div>
+        <span class="cert-tick">Completed</span>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge lvmh">
+          <span style="font-size:0.65rem;font-weight:700;color:#c9a86c;letter-spacing:0.05em;">LVMH</span>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Creation &amp; Branding, Retail &amp; Client Experience</div>
+          <div class="cert-meta">LVMH &nbsp;·&nbsp; 2026</div>
+        </div>
+        <span class="cert-tick">Completed</span>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge gads">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Google Ads Search Certification</div>
+          <div class="cert-meta">Google &nbsp;·&nbsp; 2025</div>
+        </div>
+        <span class="cert-tick in-progress">In Progress</span>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge anthropic">
+          <span style="font-size:1rem;">✦</span>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Claude 101 and AI Fluency</div>
+          <div class="cert-meta">Anthropic &nbsp;·&nbsp; 2026</div>
+        </div>
+        <span class="cert-tick">Completed</span>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge mycaptain">
+          <span style="font-size:1rem;">🚀</span>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Entrepreneurship Workshop</div>
+          <div class="cert-meta">MyCaptain &nbsp;·&nbsp; Feb 2020</div>
+        </div>
+        <span class="cert-tick">Completed</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     WORK EXPERIENCE
+══════════════════════════════════════ -->
+<section id="work">
+  <h2 class="work-heading reveal">my work<br/>experience</h2>
+
+  <div class="experience-list">
+
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">KeelWorks Foundation</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-role">Marketing Manager</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-date">Aug 2025 – Present</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-location">Remote · NGO</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed and executed monthly email campaigns with segmentation and A/B testing, lifting open rates from 12% to 55% and raising $3K across 1,200+ subscribers.</li>
+        <li>Owned SEO and content publishing across 90 WordPress blogs, managing editorial schedules and on-page optimisation to drive organic growth.</li>
+        <li>Managed Google Ads Grant end-to-end, configuring GA4 tracking across 3 audience segments and delivering recommendations that shaped content strategy.</li>
+        <li>Partnered with Salesforce and on-site teams to translate refugee settlement insights into actionable content and channel decisions.</li>
+      </ul>
+      <a href="keelworks-projects.html" class="read-more-btn">View Projects &nbsp;→</a>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">Northeastern University</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-role">Online Learning Assistant</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-date">Nov 2024 – May 2025</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-location">Boston, MA</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Audited 75 web pages analyzing 100K+ user interactions, delivering recommendations that improved platform accessibility scores to 95 on WAVE.</li>
+        <li>Built Excel reports to track accessibility findings, enabling the team to prioritize fixes and monitor remediation progress.</li>
+        <li>Applied HTML and CSS edits across learning platform pages to resolve flagged issues and align with WCAG compliance standards.</li>
+      </ul>
+      <a href="northeastern-projects.html" class="read-more-btn">View All Projects &nbsp;→</a>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">Basshub LocateUs</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-role">Product Marketing Associate</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-date">July 2022 – Aug 2023</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-location">Bengaluru, India · E-Commerce</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Led project management across 3 client accounts, coordinating workflows, deadlines, and stakeholder reporting, driving 20% engagement growth and 12% product adoption lift.</li>
+        <li>Executed digital advertising campaigns across 3 AI product launches, aligning creative and delivery timelines to ensure channel consistency.</li>
+        <li>Developed brand identity and GTM strategies for 3 B2B SaaS platforms, translating product features into consumer-facing messaging.</li>
+        <li>Coordinated SEO and content optimisation across digital platforms, tracking performance via UTM tagging to inform campaign decisions.</li>
+      </ul>
+      <a href="basshub-projects.html" class="read-more-btn">View Projects &nbsp;→</a>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">Hindustan Aeronautics Ltd</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-role">Product Enablement Associate</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-date">Dec 2021 – Jun 2022</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-location">Bengaluru, India · via Svykan Aerospace</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Managed project tracking across LCA-Tejas and Airbus A350 workstreams using Jira and Asana, coordinating sprint cycles and delivery schedules across CAD, CNC, and QA teams.</li>
+        <li>Owned technical documentation across 3 concurrent aerospace programs, ensuring version-controlled deliverables, zero critical defects, and ATA compliance.</li>
+        <li>Resolved cross-functional bottlenecks through structured stakeholder communication, reducing turnaround times by 15% and achieving 8–10% cost savings.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">Weezy Streetwear</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-role">Growth &amp; Digital Marketing Strategist</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-date">Jun 2021 – Nov 2021</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-location">Remote, India · DTC</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Built influencer partnerships end-to-end covering outreach, collab briefs, and brand shoot coordination, driving 25% engagement growth and 3K new followers in 6 months.</li>
+        <li>Directed full creative production for Instagram across photography, lifestyle imagery, and short-form video for Feed and Reels across 150+ SKUs.</li>
+        <li>Analyzed Shopify metrics across 50+ SKUs, translating data into content recommendations that improved customer engagement by 12%.</li>
+      </ul>
+      <a href="weezy-projects.html" class="read-more-btn">View Projects &nbsp;→</a>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">Unschool</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-role">Product Marketing Intern</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-date">Oct 2020 – April 2021</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-location">Remote, India · YCombinator '19 EdTech</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Ran outbound prospecting for webinars, building target lists and using objection-handling playbooks to convert student interest into paid enrolments, contributing to $15K+ in revenue over 6 months.</li>
+        <li>Built and scaled student-led micro-communities across multiple universities as Regional Head, driving campus influencer programs and unlocking new acquisition channels.</li>
+        <li>Designed and executed on-ground activations and referral funnels that contributed to 25% growth in qualified leads and a measurable lift in learner sign-ups.</li>
+        <li>Maintained campaign trackers and outreach schedules to support consistent messaging execution across all university channels.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">Afrimerican Culture Initiative</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-role">Project Manager</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-date">Jan 2024 – May 2024</span>
+        <span class="exp-sep">·</span>
+        <span class="exp-location">Boston, MA · Project Experience</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Led research, storytelling, and data-driven reporting for the Red Line T Extension project, integrating community narratives with transportation data to support equitable urban planning decisions.</li>
+        <li>Managed marketing strategy and communication planning for 5 live events and webinars, coordinating digital assets, campaign calendars, and partner outreach to boost attendance by 20%.</li>
+        <li>Delivered a final strategy deck at Northeastern University demonstrating the intersection of transit equity, cultural preservation, and urban design for historically underserved Black communities in Boston.</li>
+      </ul>
+      <a href="afrimerican-projects.html" class="read-more-btn">View Projects &nbsp;→</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     BLOGS
+══════════════════════════════════════ -->
+<section id="blogs">
+  <div class="reveal">
+    <span class="blogs-eyebrow">Also a writer</span>
+    <p class="blogs-intro">I write about marketing, AI, and culture on Medium.</p>
+  </div>
+
+  <div class="blogs-grid reveal">
+
+    <a class="blog-card" href="https://medium.com/@vishwanathnisarga50/my-pmm-take-on-the-skims-face-wrap-a4ceba2dd64a" target="_blank" rel="noopener">
+      <div class="blog-card-bg" style="background:#3d0505;"></div>
+      <div class="blog-card-content">
+        <span class="blog-tag">AI &amp; Marketing</span>
+        <p class="blog-title">My PMM Take on the Skims Face Wrap</p>
+        <p class="blog-teaser">When a brand makes a face mask go viral, that is not a product launch. That is positioning.</p>
+      </div>
+      <div class="blog-card-hover">
+        <span class="blog-hover-title">My PMM Take on the Skims Face Wrap</span>
+      </div>
+    </a>
+
+    <a class="blog-card" href="https://medium.com/@vishwanathnisarga50/how-reframe-turned-interview-prep-into-a-pmm-masterclass-40f80c0ce4e3" target="_blank" rel="noopener">
+      <div class="blog-card-bg" style="background:#2a1a0a;"></div>
+      <div class="blog-card-content">
+        <span class="blog-tag">Career &amp; Growth</span>
+        <p class="blog-title">How an Interview Prep Turned as a PMM Masterclass</p>
+        <p class="blog-teaser">One tool turned my interview prep into a positioning exercise I did not expect.</p>
+      </div>
+      <div class="blog-card-hover">
+        <span class="blog-hover-title">How an Interview Prep Turned as a PMM Masterclass</span>
+      </div>
+    </a>
+
+    <a class="blog-card" href="https://medium.com/@vishwanathnisarga50/when-a-joke-doesnt-blend-e-l-f-cosmetics-matt-rife-and-the-marketing-backlash-fc7aa400d591" target="_blank" rel="noopener">
+      <div class="blog-card-bg" style="background:#0a1a2a;"></div>
+      <div class="blog-card-content">
+        <span class="blog-tag">Brand &amp; Culture</span>
+        <p class="blog-title">When a Joke Does Not Blend</p>
+        <p class="blog-teaser">e.l.f. Cosmetics, Matt Rife, and the marketing backlash no one saw coming.</p>
+      </div>
+      <div class="blog-card-hover">
+        <span class="blog-hover-title">When a Joke Does Not Blend</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="blogs-more reveal">
+    <a href="https://medium.com/@vishwanathnisarga50" target="_blank" rel="noopener">Read all posts on Medium →</a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     GET IN TOUCH
+══════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-left reveal" style="display:flex;gap:2.5rem;align-items:center;">
+      <div class="contact-headshot">
+        <img src="images/nisarga-headshot.jpg" alt="Nisarga Vishwanath"
+             onerror="this.parentElement.style.display='none'" />
+      </div>
+      <div>
+        <span class="contact-eyebrow">say hello</span>
+        <h2 class="contact-heading">Let's<br/>work!</h2>
+        <div class="contact-status">
+          <span class="dot"></span>
+          Currently open to full-time opportunities in USA for digital marketing and product roles
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right reveal">
+      <a href="https://www.linkedin.com/in/nisarga-vishwanath-361122198/"
+         target="_blank" rel="noopener" class="contact-link">
+        <div class="contact-link-icon linkedin">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/nisarga-vishwanath-361122198</span>
+        </div>
+      </a>
+
+      <a href="mailto:nisargav135@gmail.com" class="contact-link">
+        <div class="contact-link-icon email">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M22 6l-10 7L2 6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">nisargav135@gmail.com</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="contact-footer">
+    <span class="contact-footer-name">NISARGA VISHWANATH</span>
+    <span class="contact-footer-copy">© 2025 · Built with intention</span>
+  </div>
+</section>
+
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

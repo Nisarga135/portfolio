@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeelWorks Foundation — Nisarga Vishwanath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sacramento&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --burgundy:    #6B0F0F;
+      --dark-red:    #3d0505;
+      --beige-light: #e8d5bf;
+      --beige-mid:   #c9a882;
+      --beige-dark:  #b0916e;
+      --cream:       #f5ede0;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--burgundy); overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream); border-bottom: 1px solid #d4b896;
+      padding: 1rem 3.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--burgundy); text-decoration: none; text-transform: uppercase;
+      transition: gap 0.2s;
+    }
+    .back-btn:hover { gap: 0.85rem; }
+    .topbar-name {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--beige-dark);
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: #1a0303; padding: 6rem 3.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 40% 60%, #3a0808 0%, #0d0101 70%);
+    }
+    .page-hero-inner { position: relative; z-index: 2; max-width: 860px; }
+    .page-hero-eyebrow {
+      font-family: 'Sacramento', cursive; font-size: 1.6rem;
+      color: var(--beige-mid); display: block; margin-bottom: 0.6rem;
+    }
+    .page-hero-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem); color: var(--white);
+      line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 1.4rem;
+    }
+    .page-hero-sub {
+      font-size: 0.95rem; font-weight: 300; color: #c8b0a0;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .page-hero-sub .dot { color: #6a4040; }
+
+    /* ── PAGE WRAPPER ── */
+    .page-body {
+      padding: 4rem 3.5rem 7rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex; flex-direction: column; gap: 4rem;
+    }
+
+    /* ── OBJECTIVE ── */
+    .objective {
+      font-size: 1.05rem; font-weight: 300; color: #3a1a1a;
+      line-height: 1.8; max-width: 760px;
+      border-left: 3px solid var(--beige-mid);
+      padding-left: 1.4rem;
+    }
+
+    /* ── KEY METRICS ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #d4b896;
+      border: 1px solid #d4b896;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .metric-box {
+      background: #fff9f2;
+      padding: 2.4rem 1.5rem 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.4rem; text-align: center;
+    }
+    .metric-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      color: var(--dark-red); line-height: 1; letter-spacing: 0.02em;
+    }
+    .metric-primary-label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--burgundy);
+    }
+    .metric-secondary-label {
+      font-size: 0.72rem; font-weight: 300; color: var(--beige-dark);
+      letter-spacing: 0.04em; line-height: 1.4;
+    }
+
+    /* ── NEWSLETTER IMAGES ── */
+    .images-block {
+      display: flex; flex-direction: column; gap: 0.9rem;
+    }
+    .images-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .img-slot {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid #d4b896;
+      aspect-ratio: 16 / 10;
+      background: var(--beige-mid);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-slot img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: none;
+    }
+    .img-slot img.loaded { display: block; }
+    .img-slot img.loaded ~ .ph { display: none; }
+    .ph {
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      z-index: 1;
+    }
+    .ph-icon { font-size: 2rem; }
+    .ph-name {
+      font-size: 0.7rem; font-weight: 600; color: var(--dark-red);
+      text-transform: uppercase; letter-spacing: 0.08em; text-align: center;
+    }
+    .ph-file {
+      font-size: 0.62rem; color: var(--burgundy); opacity: 0.45;
+    }
+    .img-caption {
+      text-align: center;
+      font-size: 0.77rem; color: var(--beige-dark);
+      letter-spacing: 0.06em; font-style: italic;
+    }
+
+    /* ── PERFORMANCE TABLE ── */
+    .table-wrap {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid #d4b896;
+      box-shadow: 0 2px 16px rgba(60,10,10,0.06);
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+    }
+    thead tr {
+      background: var(--dark-red);
+    }
+    thead th {
+      padding: 1rem 1.8rem;
+      font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--cream); text-align: left;
+    }
+    thead th:not(:first-child) { text-align: center; }
+    tbody tr {
+      background: #fff9f2;
+      border-bottom: 1px solid #e8d5bf;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td {
+      padding: 1rem 1.8rem;
+      font-size: 0.88rem; font-weight: 300; color: #3a1a1a;
+    }
+    tbody td:not(:first-child) {
+      text-align: center; font-weight: 500;
+      color: var(--dark-red);
+    }
+    tbody td:first-child {
+      font-weight: 400; color: #5a2a2a;
+      letter-spacing: 0.02em;
+    }
+    tbody tr:hover td { background: #fdf0e5; }
+
+    /* ── KEY RESULTS ── */
+    .results-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 1.1rem;
+    }
+    .results-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      font-size: 0.9rem; font-weight: 300; color: #3a1a1a;
+      line-height: 1.7;
+    }
+    .results-list li .ri { font-size: 1.15rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+    /* ── TAGS ── */
+    .tags-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid #d4b896;
+    }
+    .tag {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--burgundy); background: var(--beige-light);
+      border: 1px solid #d4b896; padding: 0.3rem 0.8rem; border-radius: 20px;
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .topbar { padding: 1rem 1.5rem; }
+      .page-hero { padding: 4rem 1.5rem 3.5rem; }
+      .page-body { padding: 3rem 1.5rem 5rem; gap: 3rem; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .images-pair { grid-template-columns: 1fr; }
+      thead th, tbody td { padding: 0.75rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  <span class="topbar-name">Nisarga Vishwanath</span>
+</header>
+
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-hero-eyebrow">KeelWorks Foundation &nbsp; Aug 2025 – Present</span>
+    <h1 class="page-hero-heading">Email Marketing<br/>&amp; Growth</h1>
+    <p class="page-hero-sub">
+      <span>Marketing Manager</span>
+      <span class="dot">·</span>
+      <span>Remote &nbsp;·&nbsp; NGO</span>
+      <span class="dot">·</span>
+      <span>Refugee Workforce Development</span>
+    </p>
+  </div>
+</section>
+
+
+<div class="page-body">
+
+  <!-- OBJECTIVE -->
+  <p class="objective reveal">
+    Owned end-to-end email marketing for KeelWorks Foundation, a nonprofit supporting refugee
+    communities across Kenya and beyond, growing subscriber engagement and fundraising impact
+    month over month.
+  </p>
+
+
+  <!-- KEY METRICS -->
+  <div class="metrics-grid reveal">
+    <div class="metric-box">
+      <span class="metric-num">55%</span>
+      <span class="metric-primary-label">Peak Open Rate</span>
+      <span class="metric-secondary-label">Feb 2026</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">1,200+</span>
+      <span class="metric-primary-label">Subscribers</span>
+      <span class="metric-secondary-label">Active list</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">$3K</span>
+      <span class="metric-primary-label">Raised</span>
+      <span class="metric-secondary-label">Via email campaigns</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">2×</span>
+      <span class="metric-primary-label">Above Industry</span>
+      <span class="metric-secondary-label">Benchmark 20–30%</span>
+    </div>
+  </div>
+
+
+  <!-- NEWSLETTER IMAGES -->
+  <div class="images-block reveal">
+    <div class="images-pair">
+      <div class="img-slot">
+        <img src="images/keelworks/keelworks-newsletter-1.jpg"
+             alt="The Current — March 2026"
+             onload="this.classList.add('loaded')"
+             onerror="this.style.display='none'" />
+        <div class="ph">
+          <span class="ph-icon">📧</span>
+          <span class="ph-name">The Current — Mar '26<br/>KeelMaster Begins in Kenya</span>
+          <span class="ph-file">keelworks-newsletter-1.jpg</span>
+        </div>
+      </div>
+      <div class="img-slot">
+        <img src="images/keelworks/keelworks-newsletter-2.jpg"
+             alt="2025–2026 Annual Report Newsletter"
+             onload="this.classList.add('loaded')"
+             onerror="this.style.display='none'" />
+        <div class="ph">
+          <span class="ph-icon">📋</span>
+          <span class="ph-name">2025–2026 Annual Report<br/>Newsletter Edition</span>
+          <span class="ph-file">keelworks-newsletter-2.jpg</span>
+        </div>
+      </div>
+    </div>
+    <p class="img-caption">The Current &nbsp;·&nbsp; KeelWorks Monthly Newsletter</p>
+  </div>
+
+
+  <!-- PERFORMANCE TABLE -->
+  <div class="table-wrap reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Open Rate</th>
+          <th>Bounce Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jan 2026</td>
+          <td>53.12%</td>
+          <td>1.18%</td>
+        </tr>
+        <tr>
+          <td>Feb 2026</td>
+          <td>56.04%</td>
+          <td>1.18%</td>
+        </tr>
+        <tr>
+          <td>Mar 2026</td>
+          <td>52.36%</td>
+          <td>2.61%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- KEY RESULTS -->
+  <ul class="results-list reveal">
+    <li>
+      <span class="ri">📈</span>
+      <span>Open rates consistently 2× above industry benchmark of 20–30% across all three months</span>
+    </li>
+    <li>
+      <span class="ri">📬</span>
+      <span>Bounce rates maintained below 2% for the first two months, reflecting strong list hygiene and deliverability</span>
+    </li>
+    <li>
+      <span class="ri">💛</span>
+      <span>$3K raised and subscriber base grown to 1,200+ through targeted monthly campaigns aligned with program milestones</span>
+    </li>
+  </ul>
+
+
+  <!-- TAGS -->
+  <div class="tags-row reveal">
+    <span class="tag">Email Marketing</span>
+    <span class="tag">Audience Segmentation</span>
+    <span class="tag">A/B Testing</span>
+    <span class="tag">Copywriting</span>
+    <span class="tag">Nonprofit Marketing</span>
+    <span class="tag">Campaign Analytics</span>
+  </div>
+
+</div><!-- /page-body -->
+
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

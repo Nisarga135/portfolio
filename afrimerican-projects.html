@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Afrimerican Culture Initiative — Nisarga Vishwanath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sacramento&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --burgundy:    #6B0F0F;
+      --dark-red:    #3d0505;
+      --beige-light: #e8d5bf;
+      --beige-mid:   #c9a882;
+      --beige-dark:  #b0916e;
+      --cream:       #f5ede0;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--burgundy); overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream); border-bottom: 1px solid #d4b896;
+      padding: 1rem 3.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--burgundy); text-decoration: none; text-transform: uppercase;
+      transition: gap 0.2s;
+    }
+    .back-btn:hover { gap: 0.85rem; }
+    .topbar-name {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--beige-dark);
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: #1a0303; padding: 6rem 3.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 40% 60%, #3a0808 0%, #0d0101 70%);
+    }
+    .page-hero-inner { position: relative; z-index: 2; max-width: 860px; }
+    .page-hero-eyebrow {
+      font-family: 'Sacramento', cursive; font-size: 1.6rem;
+      color: var(--beige-mid); display: block; margin-bottom: 0.6rem;
+    }
+    .page-hero-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem); color: var(--white);
+      line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 1.4rem;
+    }
+    .page-hero-sub {
+      font-size: 0.95rem; font-weight: 300; color: #c8b0a0;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .page-hero-sub .dot { color: #6a4040; }
+
+    /* ── METRICS BAR ── */
+    .metrics-bar {
+      background: var(--beige-light);
+      border-bottom: 1px solid #d4b896;
+      padding: 2.2rem 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .metric {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.25rem; text-align: center; padding: 0 1rem;
+      border-right: 1px solid #d4b896;
+    }
+    .metric:last-child { border-right: none; }
+    .metric-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem; color: var(--dark-red);
+      line-height: 1; letter-spacing: 0.03em;
+    }
+    .metric-label {
+      font-size: 0.73rem; font-weight: 400; color: #7a4040;
+      letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.35;
+    }
+
+    /* ── PAGE BODY ── */
+    .page-body {
+      padding: 4rem 3.5rem 7rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex; flex-direction: column; gap: 4rem;
+    }
+
+    /* ── OBJECTIVE ── */
+    .objective {
+      font-size: 1.05rem; font-weight: 300; color: #3a1a1a;
+      line-height: 1.8; max-width: 780px;
+      border-left: 3px solid var(--beige-mid);
+      padding-left: 1.4rem;
+    }
+
+    /* ── PHOTO MOSAIC ── */
+    .mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 280px 200px;
+      gap: 0.75rem;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .mosaic-cell.feature { grid-row: 1 / 3; }
+    .mosaic-cell {
+      position: relative;
+      background: var(--beige-mid);
+      overflow: hidden;
+    }
+    .mosaic-cell img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .mosaic-cell:hover img { transform: scale(1.04); }
+    .mosaic-cell .ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.4rem; padding: 1rem; text-align: center;
+    }
+    .mosaic-cell img.loaded ~ .ph { display: none; }
+    .ph-icon { font-size: 1.6rem; }
+    .ph-label {
+      font-size: 0.7rem; font-weight: 600; color: var(--dark-red);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .ph-file { font-size: 0.6rem; color: var(--burgundy); opacity: 0.45; }
+    .mosaic-cell.t1 { background: #c8a47c; }
+    .mosaic-cell.t2 { background: #b89070; }
+    .mosaic-cell.t3 { background: #a87e62; }
+    .mosaic-cell.t4 { background: #bd9a78; }
+    .mosaic-cell.t5 { background: #b08870; }
+    .mosaic-caption {
+      text-align: center; font-size: 0.77rem; color: var(--beige-dark);
+      letter-spacing: 0.06em; font-style: italic; margin-top: 0.5rem;
+    }
+
+    /* ── CASE STUDY GRID ── */
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .case-block {
+      background: #fff9f2;
+      border: 1px solid #d4b896;
+      border-radius: 14px;
+      padding: 1.8rem 1.6rem;
+    }
+    .case-block-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem; letter-spacing: 0.12em;
+      color: var(--beige-dark); text-transform: uppercase;
+      margin-bottom: 0.5rem; display: block;
+    }
+    .case-block-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; color: var(--dark-red);
+      letter-spacing: 0.04em; line-height: 1.05; margin-bottom: 0.9rem;
+    }
+    .case-block p {
+      font-size: 0.84rem; font-weight: 300; color: #3a1a1a; line-height: 1.75;
+    }
+
+    /* ── DELIVERABLES ── */
+    .deliverables-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+    .deck-preview {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid #d4b896;
+      aspect-ratio: 16/9;
+      background: #bd9a78;
+      position: relative;
+    }
+    .deck-preview img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top left;
+      display: block;
+    }
+    .deck-preview .ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .deck-preview img.loaded ~ .ph { display: none; }
+    .results-card {
+      background: #fff9f2;
+      border: 1px solid #d4b896;
+      border-radius: 14px;
+      padding: 2rem 1.8rem;
+    }
+    .results-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem; color: var(--dark-red);
+      letter-spacing: 0.08em; margin-bottom: 1.1rem;
+    }
+    .results-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.95rem;
+    }
+    .results-list li {
+      display: flex; align-items: flex-start; gap: 0.9rem;
+      font-size: 0.87rem; font-weight: 300; color: #3a1a1a; line-height: 1.7;
+    }
+    .results-list li .ri { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+    /* ── TAGS ── */
+    .tags-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding-top: 2rem; border-top: 1px solid #d4b896;
+    }
+    .tag {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--burgundy); background: var(--beige-light);
+      border: 1px solid #d4b896; padding: 0.3rem 0.8rem; border-radius: 20px;
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .topbar { padding: 1rem 1.5rem; }
+      .page-hero { padding: 4rem 1.5rem 3.5rem; }
+      .metrics-bar { padding: 2rem 1.5rem; grid-template-columns: repeat(2, 1fr); }
+      .metric { border-right: none; border-bottom: 1px solid #d4b896; padding-bottom: 1rem; }
+      .metric:nth-child(2), .metric:last-child { border-bottom: none; }
+      .page-body { padding: 2.5rem 1.5rem 5rem; gap: 2.5rem; }
+      .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .mosaic-cell.feature { grid-row: auto; }
+      .mosaic-cell { min-height: 180px; }
+      .case-grid { grid-template-columns: 1fr; }
+      .deliverables-wrap { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  <span class="topbar-name">Nisarga Vishwanath</span>
+</header>
+
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-hero-eyebrow">Afrimerican Culture Initiative &nbsp; Jan – May 2024</span>
+    <h1 class="page-hero-heading">Transit Equity<br/>&amp; Community<br/>Strategy</h1>
+    <p class="page-hero-sub">
+      <span>Project Manager</span>
+      <span class="dot">·</span>
+      <span>Boston, MA</span>
+      <span class="dot">·</span>
+      <span>Northeastern University</span>
+    </p>
+  </div>
+</section>
+
+
+<!-- METRICS BAR -->
+<div class="metrics-bar reveal">
+  <div class="metric">
+    <span class="metric-number">5</span>
+    <span class="metric-label">Live Events<br/>&amp; Webinars</span>
+  </div>
+  <div class="metric">
+    <span class="metric-number">20%</span>
+    <span class="metric-label">Attendance<br/>Growth</span>
+  </div>
+  <div class="metric">
+    <span class="metric-number">1</span>
+    <span class="metric-label">Strategy Deck<br/>Delivered</span>
+  </div>
+  <div class="metric">
+    <span class="metric-number">4</span>
+    <span class="metric-label">Months of<br/>Research</span>
+  </div>
+</div>
+
+
+<div class="page-body">
+
+  <!-- OBJECTIVE -->
+  <p class="objective reveal">
+    Led research, storytelling, and community strategy for the Red Line T Extension project —
+    integrating cultural narratives, transportation data, and equitable urban planning principles
+    to advocate for historically underserved Black communities in Boston.
+  </p>
+
+
+  <!-- PHOTO MOSAIC -->
+  <div class="reveal">
+    <div class="mosaic">
+
+      <!-- FEATURE: Mattapan trolley — tall left cell, spans 2 rows -->
+      <div class="mosaic-cell feature t1">
+        <img src="images/afrimerican/trolley.jpg" alt="Mattapan Trolley"
+             onload="this.classList.add('loaded')" onerror="this.style.display='none'" />
+        <div class="ph">
+          <span class="ph-icon">🚃</span>
+          <span class="ph-label">Mattapan Trolley</span>
+          <span class="ph-file">trolley.jpg</span>
+        </div>
+      </div>
+
+      <!-- Top row right: map + team -->
+      <div class="mosaic-cell t2">
+        <img src="images/afrimerican/map.jpg" alt="Red Line Map"
+             onload="this.classList.add('loaded')" onerror="this.style.display='none'" />
+        <div class="ph">
+          <span class="ph-icon">🗺️</span>
+          <span class="ph-label">Red Line Map</span>
+          <span class="ph-file">map.jpg</span>
+        </div>
+      </div>
+      <div class="mosaic-cell t3">
+        <img src="images/afrimerican/team.jpg" alt="Team Zoom"
+             onload="this.classList.add('loaded')" onerror="this.style.display='none'" />
+        <div class="ph">
+          <span class="ph-icon">👥</span>
+          <span class="ph-label">Team</span>
+          <span class="ph-file">team.jpg</span>
+        </div>
+      </div>
+
+      <!-- Bottom row right: data + bburg -->
+      <div class="mosaic-cell t4">
+        <img src="images/afrimerican/data.jpg" alt="Tourism Data Chart"
+             onload="this.classList.add('loaded')" onerror="this.style.display='none'" />
+        <div class="ph">
+          <span class="ph-icon">📊</span>
+          <span class="ph-label">Tourism Data</span>
+          <span class="ph-file">data.jpg</span>
+        </div>
+      </div>
+      <div class="mosaic-cell t5">
+        <img src="images/afrimerican/bburg.jpg" alt="BBURG History"
+             onload="this.classList.add('loaded')" onerror="this.style.display='none'" />
+        <div class="ph">
+          <span class="ph-icon">🏛️</span>
+          <span class="ph-label">BBURG History</span>
+          <span class="ph-file">bburg.jpg</span>
+        </div>
+      </div>
+
+    </div>
+    <p class="mosaic-caption">Red Line T Extension Project · Community Research &amp; Strategy · Boston, MA</p>
+  </div>
+
+
+  <!-- CASE STUDY: 3 pillars -->
+  <div class="case-grid reveal">
+    <div class="case-block">
+      <span class="case-block-label">Research</span>
+      <div class="case-block-heading">Community Narratives &amp; Data</div>
+      <p>Integrated qualitative storytelling with transportation ridership data, tourism charts, and historical records to build a research foundation connecting cultural preservation to transit equity decisions.</p>
+    </div>
+    <div class="case-block">
+      <span class="case-block-label">Strategy</span>
+      <div class="case-block-heading">Events &amp; Marketing</div>
+      <p>Managed marketing strategy and communications for 5 live events and webinars — coordinating digital assets, campaign calendars, and partner outreach that drove a 20% increase in attendance.</p>
+    </div>
+    <div class="case-block">
+      <span class="case-block-label">Deliverable</span>
+      <div class="case-block-heading">Strategy Deck at Northeastern</div>
+      <p>Presented a final strategy deck at Northeastern University demonstrating the intersection of transit equity, cultural preservation, and urban design for the Mattapan and Roxbury communities.</p>
+    </div>
+  </div>
+
+
+  <!-- DECK PREVIEW + RESULTS -->
+  <div class="deliverables-wrap reveal">
+
+    <div class="deck-preview">
+      <img src="images/afrimerican/deck.jpg" alt="Strategy Deck Slide"
+           onload="this.classList.add('loaded')" onerror="this.style.display='none'" />
+      <div class="ph">
+        <span class="ph-icon" style="font-size:1.6rem">📑</span>
+        <span class="ph-label">Strategy Deck</span>
+        <span class="ph-file">deck.jpg</span>
+      </div>
+    </div>
+
+    <div class="results-card">
+      <div class="results-heading">Key Results</div>
+      <ul class="results-list">
+        <li>
+          <span class="ri">📈</span>
+          <span>20% increase in event attendance across 5 live events and webinars through coordinated digital outreach and campaign planning</span>
+        </li>
+        <li>
+          <span class="ri">🗺️</span>
+          <span>Delivered research integrating Red Line transit data, community history, and tourism economics to support equitable urban planning decisions</span>
+        </li>
+        <li>
+          <span class="ri">🏛️</span>
+          <span>Final strategy deck presented at Northeastern University, proposing culturally-grounded solutions for the Mattapan trolley extension and BBURG corridor</span>
+        </li>
+        <li>
+          <span class="ri">🤝</span>
+          <span>Partnered with community stakeholders to ensure historically underserved Black communities in Boston had representation in transit planning conversations</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+
+  <!-- TAGS -->
+  <div class="tags-row reveal">
+    <span class="tag">Project Management</span>
+    <span class="tag">Community Research</span>
+    <span class="tag">Storytelling</span>
+    <span class="tag">Marketing Strategy</span>
+    <span class="tag">Event Marketing</span>
+    <span class="tag">Urban Planning</span>
+    <span class="tag">Data Reporting</span>
+    <span class="tag">Transit Equity</span>
+  </div>
+
+</div>
+
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

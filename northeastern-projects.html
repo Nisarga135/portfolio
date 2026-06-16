@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research &amp; Data Projects — Nisarga Vishwanath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sacramento&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --burgundy:    #6B0F0F;
+      --dark-red:    #3d0505;
+      --beige-light: #e8d5bf;
+      --beige-mid:   #c9a882;
+      --beige-dark:  #b0916e;
+      --cream:       #f5ede0;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--burgundy); overflow-x: hidden; }
+
+    /* TOP BAR */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream); border-bottom: 1px solid #d4b896;
+      padding: 1rem 3.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--burgundy); text-decoration: none; text-transform: uppercase;
+      transition: gap 0.2s;
+    }
+    .back-btn:hover { gap: 0.85rem; }
+    .topbar-name {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--beige-dark);
+    }
+
+    /* HERO */
+    .page-hero {
+      background: #1a0303; padding: 6rem 3.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 40% 60%, #3a0808 0%, #0d0101 70%);
+    }
+    .page-hero-inner { position: relative; z-index: 2; max-width: 860px; }
+    .page-hero-eyebrow {
+      font-family: 'Sacramento', cursive; font-size: 1.6rem;
+      color: var(--beige-mid); display: block; margin-bottom: 0.6rem;
+    }
+    .page-hero-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem); color: var(--white);
+      line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 1.4rem;
+    }
+    .page-hero-sub {
+      font-size: 0.95rem; font-weight: 300; color: #c8b0a0;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .page-hero-sub .dot { color: #6a4040; }
+    .page-hero-intro {
+      margin-top: 1.8rem;
+      font-size: 0.9rem; font-weight: 300; color: #a08070;
+      max-width: 560px; line-height: 1.7;
+    }
+
+    /* PAGE WRAPPER */
+    .page-body {
+      padding: 4rem 3.5rem 7rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex; flex-direction: column; gap: 4rem;
+    }
+
+    /* PROJECT GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* PROJECT CARD */
+    .proj-card {
+      background: #fff9f2;
+      border: 1px solid #d4b896;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      height: 400px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .proj-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(60,10,10,0.13);
+    }
+
+    /* Card image */
+    .proj-img-wrap {
+      width: 100%;
+      height: 180px;
+      max-height: 180px;
+      background: var(--beige-mid);
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .proj-img-wrap img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: none;
+    }
+    .proj-img-wrap img.loaded { display: block; }
+    .proj-img-wrap img.loaded ~ .proj-ph { display: none; }
+    .proj-ph {
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem; z-index: 1;
+    }
+    .proj-ph-icon { font-size: 1.8rem; }
+    .proj-ph-name {
+      font-size: 0.66rem; font-weight: 600; color: var(--dark-red);
+      text-transform: uppercase; letter-spacing: 0.06em; text-align: center;
+      padding: 0 1rem;
+    }
+
+    /* Card body */
+    .proj-body {
+      padding: 1.2rem;
+      display: flex; flex-direction: column; gap: 0.6rem; flex: 1;
+      overflow: hidden;
+    }
+    .proj-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem; color: var(--dark-red);
+      letter-spacing: 0.02em; line-height: 1.15;
+      display: -webkit-box; -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; overflow: hidden;
+    }
+    .proj-desc {
+      font-size: 0.82rem; font-weight: 300; color: #3a1a1a;
+      line-height: 1.5;
+      display: -webkit-box; -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .proj-tags {
+      display: flex; flex-wrap: wrap; gap: 0.35rem;
+      margin-top: auto; padding-top: 0.4rem;
+      overflow: hidden;
+    }
+    .proj-tag {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.04em;
+      color: var(--burgundy); background: var(--beige-light);
+      border: 1px solid #d4b896; padding: 0.2rem 0.6rem; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .proj-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      margin-top: 0.5rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--dark-red);
+      text-decoration: none;
+      border-bottom: 1.5px solid currentColor;
+      width: fit-content;
+      transition: gap 0.2s, color 0.2s;
+    }
+    .proj-link:hover { gap: 0.7rem; color: var(--burgundy); }
+
+    /* DOCUMENTS */
+    .docs-heading {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--beige-dark);
+      margin-bottom: 1.4rem; display: block;
+    }
+    .docs-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .doc-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+      border: 1px solid #d4b896;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      background: #fff9f2;
+    }
+    .doc-info {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.95rem; font-weight: 400; color: var(--dark-red);
+    }
+    .doc-info .doc-icon { font-size: 1.05rem; }
+    .doc-open-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--white);
+      background: var(--dark-red);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem; border-radius: 20px;
+      white-space: nowrap;
+      transition: gap 0.2s, background 0.2s;
+    }
+    .doc-open-btn:hover { gap: 0.55rem; background: var(--burgundy); }
+
+    /* TAGS ROW */
+    .tags-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid #d4b896;
+    }
+    .tag {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--burgundy); background: var(--beige-light);
+      border: 1px solid #d4b896; padding: 0.3rem 0.8rem; border-radius: 20px;
+    }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .topbar { padding: 1rem 1.5rem; }
+      .page-hero { padding: 4rem 1.5rem 3.5rem; }
+      .page-body { padding: 3rem 1.5rem 5rem; gap: 3rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  <span class="topbar-name">Nisarga Vishwanath</span>
+</header>
+
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-hero-eyebrow">Northeastern University &nbsp; 2023 to 2025</span>
+    <h1 class="page-hero-heading">Research &amp;<br/>Data Projects</h1>
+    <p class="page-hero-sub">
+      <span>Masters in Engineering Management</span>
+      <span class="dot">·</span>
+      <span>Marketing Concentration</span>
+      <span class="dot">·</span>
+      <span>Boston, MA</span>
+    </p>
+    <p class="page-hero-intro">A collection of data visualisation, research, and web projects built during my Masters at Northeastern.</p>
+  </div>
+</section>
+
+
+<div class="page-body">
+
+  <!-- PROJECT GRID -->
+  <div class="projects-grid reveal">
+
+    <!-- Card 1: USA Trade Analysis -->
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <img src="images/northeastern/usa-trade.jpg"
+             alt="USA Trade Analysis"
+             onload="this.classList.add('loaded')"
+             onerror="this.style.display='none'" />
+        <div class="proj-ph">
+          <span class="proj-ph-icon">🌐</span>
+          <span class="proj-ph-name">USA Trade Analysis</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <h2 class="proj-title">USA Trade Analysis</h2>
+        <p class="proj-desc">Visualised US import and export flows across key trade partners using Tableau, surfacing patterns in trade balance shifts and commodity concentration.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Tableau</span>
+          <span class="proj-tag">Trade Analysis</span>
+          <span class="proj-tag">Data Visualisation</span>
+        </div>
+        <a href="https://drive.google.com/drive/folders/1-YYL8ZMgAIpbELHflpwEq9v8Ry_BvCtc?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto" class="proj-link" target="_blank" rel="noopener">View Project &nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- Card 2: Housing Market -->
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <img src="images/northeastern/housing.jpg"
+             alt="Housing Market 2008 to 2024"
+             onload="this.classList.add('loaded')"
+             onerror="this.style.display='none'" />
+        <div class="proj-ph">
+          <span class="proj-ph-icon">🏠</span>
+          <span class="proj-ph-name">Housing Market 2008 to 2024</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <h2 class="proj-title">Housing Market 2008 to 2024</h2>
+        <p class="proj-desc">Built a Power BI time series dashboard tracking median home prices, inventory levels, and mortgage rates from the 2008 crash through the post-pandemic surge.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Power BI</span>
+          <span class="proj-tag">Time Series</span>
+          <span class="proj-tag">Economic Analysis</span>
+        </div>
+        <a href="https://drive.google.com/drive/folders/1-YYL8ZMgAIpbELHflpwEq9v8Ry_BvCtc?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto" class="proj-link" target="_blank" rel="noopener">View Project &nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- Card 3: WFH vs Back to Office -->
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <img src="images/northeastern/wfh.jpg"
+             alt="WFH vs Back to Office"
+             onload="this.classList.add('loaded')"
+             onerror="this.style.display='none'" />
+        <div class="proj-ph">
+          <span class="proj-ph-icon">💻</span>
+          <span class="proj-ph-name">WFH vs Back to Office</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <h2 class="proj-title">WFH vs Back to Office</h2>
+        <p class="proj-desc">Used Python to generate heatmaps comparing remote and in-office work preferences across industries, mapping sentiment shifts post-2020 through company policy announcements.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Heatmap</span>
+          <span class="proj-tag">Industry Research</span>
+        </div>
+        <a href="https://drive.google.com/drive/folders/1-YYL8ZMgAIpbELHflpwEq9v8Ry_BvCtc?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto" class="proj-link" target="_blank" rel="noopener">View Project &nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- Card 4: Middlesex Regional Dashboard -->
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <img src="images/northeastern/middlesex.jpg"
+             alt="Middlesex Regional Data Dashboard"
+             onload="this.classList.add('loaded')"
+             onerror="this.style.display='none'" />
+        <div class="proj-ph">
+          <span class="proj-ph-icon">📊</span>
+          <span class="proj-ph-name">Middlesex Regional Data Dashboard</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <h2 class="proj-title">Middlesex Regional Data Dashboard</h2>
+        <p class="proj-desc">Built a public Google Sites dashboard aggregating Census and regional data for Middlesex County, Massachusetts, covering demographics, housing, and economic indicators.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Google Sites</span>
+          <span class="proj-tag">Dashboard</span>
+          <span class="proj-tag">Regional Data</span>
+          <span class="proj-tag">Massachusetts</span>
+          <span class="proj-tag">Census Data</span>
+        </div>
+        <a href="https://sites.google.com/view/nisarga-vishwanath?usp=sharing" class="proj-link" target="_blank" rel="noopener">View Dashboard &nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- Card 5: 2009 Patent Distribution -->
+    <div class="proj-card">
+      <div class="proj-img-wrap">
+        <div class="proj-ph">
+          <span class="proj-ph-icon">🗺️</span>
+          <span class="proj-ph-name">Patent Distribution Map</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <h2 class="proj-title">2009 Patent Distribution</h2>
+        <p class="proj-desc">Mapped patent grants across US Metropolitan Statistical Areas in 2009, revealing regional innovation clusters and the concentration of IP activity in tech and pharma hubs.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Geospatial Data</span>
+          <span class="proj-tag">Patent Analysis</span>
+          <span class="proj-tag">Innovation Mapping</span>
+          <span class="proj-tag">MSA Research</span>
+        </div>
+        <a href="https://sites.google.com/view/2009-patent-in-usa-across-msas/home" class="proj-link" target="_blank" rel="noopener">View Map &nbsp;→</a>
+      </div>
+    </div>
+
+  </div><!-- /projects-grid -->
+
+
+  <!-- DOCUMENTS & WRITING -->
+  <div class="reveal">
+    <span class="docs-heading">Additional Documents</span>
+    <ul class="docs-list">
+      <li class="doc-row">
+        <span class="doc-info">
+          <span class="doc-icon">📄</span>
+          <span class="doc-text">PRD, Skillz Virtual Coach</span>
+        </span>
+        <a href="https://drive.google.com/drive/folders/1pGec37aHjMpwzVN33g9bgPpUEqmtJAnd?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto" class="doc-open-btn" target="_blank" rel="noopener">Open Doc &nbsp;→</a>
+      </li>
+      <li class="doc-row">
+        <span class="doc-info">
+          <span class="doc-icon">📄</span>
+          <span class="doc-text">PRD, Karigar</span>
+        </span>
+        <a href="https://drive.google.com/drive/folders/1pGec37aHjMpwzVN33g9bgPpUEqmtJAnd?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto" class="doc-open-btn" target="_blank" rel="noopener">Open Doc &nbsp;→</a>
+      </li>
+    </ul>
+  </div>
+
+
+  <!-- TAGS -->
+  <div class="tags-row reveal">
+    <span class="tag">Tableau</span>
+    <span class="tag">Power BI</span>
+    <span class="tag">Python</span>
+    <span class="tag">Google Sites</span>
+    <span class="tag">Data Visualisation</span>
+    <span class="tag">Geospatial Analysis</span>
+    <span class="tag">Economic Research</span>
+    <span class="tag">Census Data</span>
+  </div>
+
+</div><!-- /page-body -->
+
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
