@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weezy Streetwear — Nisarga Vishwanath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sacramento&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --burgundy:    #6B0F0F;
+      --dark-red:    #3d0505;
+      --beige-light: #e8d5bf;
+      --beige-mid:   #c9a882;
+      --beige-dark:  #b0916e;
+      --cream:       #f5ede0;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--burgundy); overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream); border-bottom: 1px solid #d4b896;
+      padding: 1rem 3.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--burgundy); text-decoration: none; text-transform: uppercase;
+      transition: gap 0.2s;
+    }
+    .back-btn:hover { gap: 0.85rem; }
+    .topbar-name {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--beige-dark);
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: #1a0303; padding: 6rem 3.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 40% 60%, #3a0808 0%, #0d0101 70%);
+    }
+    .page-hero-inner { position: relative; z-index: 2; max-width: 860px; }
+    .page-hero-eyebrow {
+      font-family: 'Sacramento', cursive; font-size: 1.6rem;
+      color: var(--beige-mid); display: block; margin-bottom: 0.6rem;
+    }
+    .page-hero-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem); color: var(--white);
+      line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 1.4rem;
+    }
+    .page-hero-sub {
+      font-size: 0.95rem; font-weight: 300; color: #c8b0a0;
+      line-height: 1.7; display: flex; align-items: center;
+      gap: 1.2rem; flex-wrap: wrap;
+    }
+    .page-hero-sub a {
+      color: var(--beige-mid); text-decoration: underline;
+      text-underline-offset: 3px; transition: color 0.2s;
+    }
+    .page-hero-sub a:hover { color: var(--white); }
+
+    /* ── METRICS BAR ── */
+    .metrics-bar {
+      background: var(--beige-light);
+      border-bottom: 1px solid #d4b896;
+      padding: 2.2rem 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .metric {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.25rem; text-align: center; padding: 0 1rem;
+      border-right: 1px solid #d4b896;
+    }
+    .metric:last-child { border-right: none; }
+    .metric-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.6rem; color: var(--dark-red);
+      line-height: 1; letter-spacing: 0.03em;
+    }
+    .metric-label {
+      font-size: 0.75rem; font-weight: 400; color: #7a4040;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── MAIN CARD WRAPPER ── */
+    .card-wrapper { padding: 4rem 3.5rem 6rem; }
+
+    .main-card {
+      background: #fff9f2;
+      border: 1px solid #d4b896;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 6px 36px rgba(60,10,10,0.09);
+    }
+
+    /* ── MEDIA SECTION: feed image left + phones right ── */
+    .media-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid #d4b896;
+    }
+
+    /* FEED IMAGE — left column */
+    .feed-col {
+      border-right: 1px solid #d4b896;
+      height: 420px;
+    }
+    .feed-img-wrap {
+      width: 100%;
+      height: 420px;
+      position: relative;
+      overflow: hidden;
+      background: #c4a07a;
+    }
+    .feed-img-wrap img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+    }
+    /* placeholder shown when image missing */
+    .feed-img-wrap .feed-ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .feed-img-wrap img + .feed-ph { display: none; }
+
+    /* PHONES COLUMN — right column */
+    .phones-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 2rem;
+      background: #faf4eb;
+      height: 420px;
+    }
+
+    /* ── PHONE MOCKUP ── */
+    .phone-mockup {
+      position: relative;
+      width: 160px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .phone-frame {
+      position: relative;
+      width: 160px;
+      height: 288px;   /* 9:16 ratio */
+      background: #111;
+      border-radius: 28px;
+      border: 3px solid #222;
+      box-shadow:
+        0 0 0 1px #444,
+        0 12px 40px rgba(0,0,0,0.35);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    /* camera dot notch */
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 10px; left: 50%;
+      transform: translateX(-50%);
+      width: 8px; height: 8px;
+      background: #333;
+      border-radius: 50%;
+      z-index: 10;
+    }
+    .phone-frame video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 25px;
+    }
+    /* play/pause overlay */
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+      transition: opacity 0.2s;
+    }
+    .play-btn-circle {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.88);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      transition: transform 0.15s, background 0.15s;
+    }
+    .phone-frame:hover .play-btn-circle { background: rgba(255,255,255,1); transform: scale(1.08); }
+    /* triangle play icon */
+    .play-icon {
+      width: 0; height: 0;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      border-left: 16px solid #1a0303;
+      margin-left: 3px;
+    }
+    /* pause icon — two bars */
+    .pause-icon {
+      display: flex; gap: 4px;
+    }
+    .pause-bar {
+      width: 5px; height: 16px;
+      background: #1a0303;
+      border-radius: 2px;
+    }
+    .phone-label {
+      font-size: 0.72rem; font-weight: 500;
+      color: var(--beige-dark); letter-spacing: 0.07em;
+      text-transform: uppercase; text-align: center;
+    }
+
+    /* ── CAPTION ── */
+    .media-caption {
+      text-align: center;
+      font-size: 0.77rem; color: var(--beige-dark);
+      letter-spacing: 0.06em; font-style: italic;
+      padding: 1rem 2rem 1.4rem;
+      border-bottom: 1px solid #e4c9a8;
+    }
+
+    /* ── CONTENT AREA (below media) ── */
+    .card-content {
+      padding: 2.5rem 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--dark-red); letter-spacing: 0.02em;
+      line-height: 0.95; margin-bottom: 0.4rem;
+    }
+    .card-subheading {
+      font-size: 0.82rem; font-weight: 400; color: var(--beige-dark);
+      letter-spacing: 0.05em; margin-bottom: 1.6rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card-subheading a {
+      color: var(--burgundy); text-decoration: underline;
+      text-underline-offset: 3px; font-weight: 500; transition: color 0.2s;
+    }
+    .card-subheading a:hover { color: var(--dark-red); }
+    .card-description {
+      font-size: 0.88rem; font-weight: 300; color: #3a1a1a;
+      line-height: 1.8; margin-bottom: 2rem;
+      padding-bottom: 1.6rem;
+      border-bottom: 1px solid #e4c9a8;
+    }
+    .mini-sections { display: flex; flex-direction: column; gap: 1.4rem; margin-bottom: 2rem; }
+    .mini-section-heading {
+      font-size: 0.82rem; font-weight: 600; color: var(--dark-red);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .mini-section p {
+      font-size: 0.85rem; font-weight: 300; color: #3a1a1a;
+      line-height: 1.75; padding-left: 1.6rem;
+    }
+    .card-buttons {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+      padding-top: 1.6rem; border-top: 1px solid #e4c9a8;
+      margin-bottom: 1.2rem;
+    }
+    .card-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.5rem 1.25rem; background: var(--burgundy); color: var(--cream);
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.07em;
+      border-radius: 20px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .card-btn:hover { background: var(--dark-red); transform: translateX(3px); }
+    .card-btn.outline {
+      background: transparent; color: var(--burgundy);
+      border: 1px solid var(--burgundy);
+    }
+    .card-btn.outline:hover { background: var(--burgundy); color: var(--cream); transform: translateX(3px); }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--burgundy); background: var(--beige-light);
+      border: 1px solid #d4b896; padding: 0.3rem 0.75rem; border-radius: 20px;
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .topbar { padding: 1rem 1.5rem; }
+      .page-hero { padding: 4rem 1.5rem 3.5rem; }
+      .metrics-bar { padding: 2rem 1.5rem; grid-template-columns: repeat(2, 1fr); }
+      .metric { border-right: none; border-bottom: 1px solid #d4b896; padding-bottom: 1rem; }
+      .metric:nth-child(2), .metric:last-child { border-bottom: none; }
+      .card-wrapper { padding: 2.5rem 1.5rem 4rem; }
+      .media-section { grid-template-columns: 1fr; }
+      .feed-col { border-right: none; border-bottom: 1px solid #d4b896; }
+      .feed-img-wrap { min-height: 260px; }
+      .phones-col { padding: 2rem 1rem; gap: 1.5rem; }
+      .phone-mockup { width: 140px; }
+      .phone-frame { width: 140px; height: 252px; }
+      .card-content { padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .phones-col { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  <span class="topbar-name">Nisarga Vishwanath</span>
+</header>
+
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-hero-eyebrow">Weezy Streetwear &nbsp; 2021</span>
+    <h1 class="page-hero-heading">Content &amp;<br/>Creative Work</h1>
+    <p class="page-hero-sub">
+      <span>Weezy Streetwear</span>
+      <a href="https://www.instagram.com/weezyindia/" target="_blank" rel="noopener">@weezyindia</a>
+      <span>DTC Streetwear Brand</span>
+    </p>
+  </div>
+</section>
+
+
+<!-- METRICS BAR -->
+<div class="metrics-bar reveal">
+  <div class="metric">
+    <span class="metric-number">3K</span>
+    <span class="metric-label">New Followers</span>
+  </div>
+  <div class="metric">
+    <span class="metric-number">25%</span>
+    <span class="metric-label">Engagement Growth</span>
+  </div>
+  <div class="metric">
+    <span class="metric-number">150+</span>
+    <span class="metric-label">SKUs Managed</span>
+  </div>
+  <div class="metric">
+    <span class="metric-number">6</span>
+    <span class="metric-label">Months</span>
+  </div>
+</div>
+
+
+<!-- MAIN CARD -->
+<div class="card-wrapper">
+  <div class="main-card reveal">
+
+    <!-- MEDIA ROW: feed image left, phones right -->
+    <div class="media-section">
+
+      <!-- LEFT: Feed image -->
+      <div class="feed-col">
+        <div class="feed-img-wrap">
+          <img src="weezy-feed.jpg" alt="Weezy Instagram Feed" />
+          <div class="feed-ph">
+            <span style="font-size:2rem">📷</span>
+            <span style="font-size:0.72rem;font-weight:600;color:var(--dark-red);text-transform:uppercase;letter-spacing:0.08em">Feed &amp; Photography</span>
+            <span style="font-size:0.62rem;color:var(--burgundy);opacity:0.45">weezy-feed.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Two phone mockups -->
+      <div class="phones-col">
+
+        <!-- Phone 1: Reels -->
+        <div class="phone-mockup">
+          <div class="phone-frame" id="phone1" onclick="toggleVideo(this)">
+            <video id="vid1" muted playsinline preload="metadata"
+                   style="border-radius:25px;">
+              <source src="weezy-reels.mp4" type="video/mp4">
+            </video>
+            <div class="play-btn" id="btn1">
+              <div class="play-btn-circle">
+                <div class="play-icon"></div>
+              </div>
+            </div>
+          </div>
+          <span class="phone-label">Reels</span>
+        </div>
+
+        <!-- Phone 2: Creator Collab -->
+        <div class="phone-mockup">
+          <div class="phone-frame" id="phone2" onclick="toggleVideo(this)">
+            <video id="vid2" muted playsinline preload="metadata"
+                   style="border-radius:25px;">
+              <source src="weezy-collabs.mp4" type="video/mp4">
+            </video>
+            <div class="play-btn" id="btn2">
+              <div class="play-btn-circle">
+                <div class="play-icon"></div>
+              </div>
+            </div>
+          </div>
+          <span class="phone-label">Creator Collabs</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CAPTION -->
+    <div class="media-caption">@weezyindia &nbsp;·&nbsp; Instagram Feed, Reels &amp; Creator Collabs</div>
+
+    <!-- CONTENT -->
+    <div class="card-content">
+      <h2 class="card-heading">Instagram Content &amp;<br/>Creative Direction</h2>
+      <div class="card-subheading">
+        <a href="https://www.instagram.com/weezyindia/" target="_blank" rel="noopener">@weezyindia</a>
+        <span>·</span>
+        <span>DTC Streetwear Brand</span>
+      </div>
+
+      <p class="card-description">
+        Owned end-to-end content production for Weezy Streetwear across photography, short-form video, and creator partnerships — from concept to publish, building a brand identity that resonated with India's streetwear community from the ground up.
+      </p>
+
+      <div class="mini-sections">
+        <div class="mini-section">
+          <div class="mini-section-heading"><span>📷</span> Photography &amp; Visual Direction</div>
+          <p>Shot and published daily product and lifestyle imagery across 150+ SKUs with full creative and editorial direction.</p>
+        </div>
+        <div class="mini-section">
+          <div class="mini-section-heading"><span>🎬</span> Reels &amp; Short-Form Video</div>
+          <p>Coordinated brand shoots end-to-end and edited footage for Reels and Stories, driving 25% engagement growth and 3K new followers.</p>
+        </div>
+        <div class="mini-section">
+          <div class="mini-section-heading"><span>🤝</span> Creator Collabs &amp; Influencer Campaigns</div>
+          <p>Managed outreach, collab briefs, and campaign coordination with micro-influencers across product drops and seasonal launches.</p>
+        </div>
+      </div>
+
+      <div class="card-buttons">
+        <a href="https://www.instagram.com/weezyindia/" target="_blank" rel="noopener" class="card-btn">View Feed &nbsp;→</a>
+        <a href="https://www.instagram.com/weezyindia/reels/" target="_blank" rel="noopener" class="card-btn outline">View Reels &nbsp;→</a>
+      </div>
+
+      <div class="card-tags">
+        <span class="tag">Content Production</span>
+        <span class="tag">Photography</span>
+        <span class="tag">Reels</span>
+        <span class="tag">Creator Collabs</span>
+        <span class="tag">Brand Direction</span>
+        <span class="tag">DTC Growth</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  /* ── Reveal on scroll ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── Phone video play/pause toggle ── */
+  function toggleVideo(frame) {
+    const vid = frame.querySelector('video');
+    const btn = frame.querySelector('.play-btn');
+    const circle = btn.querySelector('.play-btn-circle');
+
+    if (vid.paused) {
+      // pause all others first
+      document.querySelectorAll('.phone-frame video').forEach(v => {
+        if (v !== vid && !v.paused) {
+          v.pause();
+          const otherBtn = v.closest('.phone-frame').querySelector('.play-btn-circle');
+          otherBtn.innerHTML = '<div class="play-icon"></div>';
+        }
+      });
+      vid.play();
+      circle.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+    } else {
+      vid.pause();
+      circle.innerHTML = '<div class="play-icon"></div>';
+    }
+  }
+
+  /* restore play icon when video ends */
+  document.querySelectorAll('.phone-frame video').forEach(vid => {
+    vid.addEventListener('ended', () => {
+      const circle = vid.closest('.phone-frame').querySelector('.play-btn-circle');
+      circle.innerHTML = '<div class="play-icon"></div>';
+    });
+  });
+</script>
+
+</body>
+</html>
